@@ -1,1 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ram Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Pour éviter le défilement horizontal */
+    }
 
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #menuIcon {
+      position: fixed;
+      top: 20px;
+      left: 14px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2; /* Pour placer l'icône au-dessus du reste du contenu */
+    }
+
+    .menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      z-index: 1; /* Pour placer le menu au-dessus du reste du contenu */
+    }
+
+
+
+
+    .menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  z-index: 1; /* Pour placer le menu au-dessus du reste du contenu */
+  align-items: flex-start; /* Aligner les éléments du menu en haut */
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+
+
+
+    .product {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+
+    #cartIcon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2; /* Pour placer l'icône au-dessus du reste du contenu */
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .close {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+  </style>
+
+
+<style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .notification {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    @keyframes slide-up {
+      from {
+        bottom: -100px;
+      }
+      to {
+        bottom: 0;
+      }
+    }
+
+    .notification.show {
+      animation: slide-up 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span id="menuIcon" onclick="toggleMenu()">&#9776; Menu</span>
+    <h1>Ram Store</h1>
+  </header>
+
+
+
+
+  
+    <h1>Bienvenue dans Votre Boutique en Ligne de Qualité</h1>
+    <p>Découvrez des produits exceptionnels qui répondent à vos besoins avec élégance et excellence.</p>
+  
+
+
+  <!-- Menu -->
+  <div id="menu" class="menu">
+    <a href="#" onclick="toggleMenu()">Accueil</a>
+    <a href="#" onclick="toggleMenu()">Service</a>
+
+    <a href="#" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <!-- Contenu de votre boutique sans Swiper.js -->
+  <div>
+    <!-- Bloc de produits 1 -->
+    <div class="product" onclick="addToCart('Produit 1', 10.40)">
+      <img src="images/Produit1_image1.jpg" alt="Produit 1">
+      Produit 1 - 10.40€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+    <!-- Ajoutez les autres images de votre produit 1 de la même manière... -->
+
+    <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+    <!-- Ajoutez les autres images de votre produit 2 de la même manière... -->
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+
+
+ <div class="product" onclick="addToCart('Produit 2', 8.50)">
+      <img src="images/Produit1_image2.jpg" alt="Produit 2">
+      Produit 2 - 8.50€ - <span class="add-to-cart">Ajouter au panier</span>
+    </div>
+    <!-- Ajoutez d'autres produits de la même manière... -->
+  </div>
+
+  <!-- Panier -->
+  <div id="cartIcon" onclick="toggleCart()">
+    <i class="fas fa-shopping-cart"></i> <span id="cartItemCount">0</span>
+  </div>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="toggleCart()">&times;</span>
+      <h2>Votre Panier</h2>
+      <ul id="cartItems"></ul>
+      <p>Total: <span id="cartTotal">0.00€</span></p>
+      <button onclick="checkoutWithPayPal()">Payer avec PayPal</button>
+      <button onclick="checkoutInInstallments()">Payer en plusieurs fois</button>
+    </div>
+  </div>
+
+  <script>
+    let cartItems = [];
+    let cartTotal = 0;
+
+    function toggleMenu() {
+      let menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    function toggleCart() {
+      let cartModal = document.getElementById("cartModal");
+      cartModal.style.display = (cartModal.style.display === "block") ? "none" : "block";
+    }
+
+    function updateCart() {
+      let cartItemCount = document.getElementById("cartItemCount");
+      let cartTotalDisplay = document.getElementById("cartTotal");
+      let cartItemsList = document.getElementById("cartItems");
+
+      cartItemCount.innerText = cartItems.length;
+      cartTotalDisplay.innerText = cartTotal.toFixed(2)+ "€";
+
+      // Clear previous items
+      cartItemsList.innerHTML = "";
+
+      // Display current items
+      cartItems.forEach(item => {
+        let li = document.createElement("li");
+        li.innerText = item.name + " - " + item.price.toFixed(2) + "€";
+        cartItemsList.appendChild(li);
+      });
+    }
+
+    function addToCart(name, price) {
+      cartItems.push({ name, price });
+      cartTotal += price;
+      updateCart();
+    }
+
+    function checkoutWithPayPal() {
+      // Implement PayPal checkout logic using your PayPal integration
+      // Redirect to PayPal payment page or handle payment process accordingly
+      alert("Redirection vers la page de paiement PayPal...");
+    }
+
+    function checkoutInInstallments() {
+      // Implement installment payment logic
+      // Redirect to payment provider or handle installment process accordingly
+      alert("Paiement en plusieurs fois...");
+    }
+  </script>
+
+
+<footer>
+    <p>&copy; 2024 Ram Store</p>
+  </footer>
+
+
+
+<script>
+    // Fonction pour afficher une notification
+    function showNotification(message) {
+      var notification = document.getElementById('notification');
+      notification.innerHTML = message;
+      notification.classList.add('show');
+      setTimeout(function() {
+        notification.classList.remove('show');
+      }, 5000); // La notification reste visible pendant 5 secondes
+    }
+
+    // Exemples d'utilisation pour chaque client
+    setTimeout(function() {
+      showNotification('🎉 Merci pour votre achat, Gary! Nous espérons que nos produits vous satisfont.');
+    }, 10000);
+
+    setTimeout(function() {
+      showNotification('🌟 Bienvenue, Hélène! Merci de nous avoir choisis.');
+    }, 20000);
+
+    setTimeout(function() {
+      showNotification('🛒 Nouveau client, Sébastien! Bienvenue dans la famille Ram Store.');
+    }, 30000);
+
+    setTimeout(function() {
+      showNotification('🌈 Félicitations, Carole! Vous avez débloqué une remise exclusive.');
+    }, 40000);
+
+    setTimeout(function() {
+      showNotification('💬 Merci pour votre avis, Morgane! Nous apprécions vos commentaires.');
+    }, 50000);
+  </script>
+</body>
+</html>
