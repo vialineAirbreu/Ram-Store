@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ram Store</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -138,54 +143,31 @@
   </style>
 
 
+
+
 <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-    }
 
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
+.notifications-container {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 300px;
+  width: 100%;
+}
 
-    footer {
-      margin-top: auto;
-      text-align: center;
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-    }
+.notification {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  margin-bottom: 10px;
+  transition: opacity 0.5s ease-in-out;
+}
+</style>
 
-    .notification {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #4CAF50;
-      color: white;
-      padding: 15px;
-      border-radius: 5px 5px 0 0;
-    }
-
-    @keyframes slide-up {
-      from {
-        bottom: -100px;
-      }
-      to {
-        bottom: 0;
-      }
-    }
-
-    .notification.show {
-      animation: slide-up 0.5s ease-out forwards;
-    }
-  </style>
 </head>
 <body>
 
@@ -278,6 +260,15 @@
     </div>
   </div>
 
+
+
+<div class="notifications-container" id="notificationsContainer"></div>
+
+
+
+
+
+
   <script>
     let cartItems = [];
     let cartTotal = 0;
@@ -331,43 +322,65 @@
   </script>
 
 
+
+
+
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
+    showNotification("Gary : Merci pour votre achat sur Ram Store !", "notification-success");
+  }, 10000);
+
+  setTimeout(function () {
+    showNotification("Milène : Super service, je suis satisfait de mon achat !", "notification-success");
+  }, 20000);
+
+  setTimeout(function () {
+    showNotification("Sébastien : Livraison rapide, merci Ram Store !", "notification-success");
+  }, 30000);
+
+  setTimeout(function () {
+    showNotification("Hélène : Produits de qualité, je recommande cette boutique !", "notification-success");
+  }, 40000);
+
+  setTimeout(function () {
+    showNotification("Théo : Excellent service client, merci Ram Store !", "notification-success");
+  }, 50000);
+});
+
+function showNotification(message, className) {
+  const notificationsContainer = document.getElementById('notificationsContainer');
+  const notification = document.createElement('div');
+  notification.className = `notification ${className}`;
+  notification.textContent = message;
+  notificationsContainer.appendChild(notification);
+
+  setTimeout(function () {
+    notification.style.opacity = '1';
+  }, 100);
+
+  setTimeout(function () {
+    notification.style.opacity = '0';
+  }, 5000);
+
+  setTimeout(function () {
+    notification.remove();
+  }, 6000);
+}
+  </script>
+
+
+
+
 <footer>
     <p>&copy; 2024 Ram Store</p>
   </footer>
 
-
-
-<script>
-    // Fonction pour afficher une notification
-    function showNotification(message) {
-      var notification = document.getElementById('notification');
-      notification.innerHTML = message;
-      notification.classList.add('show');
-      setTimeout(function() {
-        notification.classList.remove('show');
-      }, 5000); // La notification reste visible pendant 5 secondes
-    }
-
-    // Exemples d'utilisation pour chaque client
-    setTimeout(function() {
-      showNotification('🎉 Merci pour votre achat, Gary! Nous espérons que nos produits vous satisfont.');
-    }, 10000);
-
-    setTimeout(function() {
-      showNotification('🌟 Bienvenue, Hélène! Merci de nous avoir choisis.');
-    }, 20000);
-
-    setTimeout(function() {
-      showNotification('🛒 Nouveau client, Sébastien! Bienvenue dans la famille Ram Store.');
-    }, 30000);
-
-    setTimeout(function() {
-      showNotification('🌈 Félicitations, Carole! Vous avez débloqué une remise exclusive.');
-    }, 40000);
-
-    setTimeout(function() {
-      showNotification('💬 Merci pour votre avis, Morgane! Nous apprécions vos commentaires.');
-    }, 50000);
-  </script>
+<!-- Inclure la bibliothèque Toastr -->
+ 
 </body>
 </html>
